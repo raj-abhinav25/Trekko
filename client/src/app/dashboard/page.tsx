@@ -1067,7 +1067,7 @@ export default function Home() {
         }, 2200);
 
         try {
-            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "https://trekko-d9ek.onrender.com";
             const res = await fetch(`${backendUrl}/api/generate`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

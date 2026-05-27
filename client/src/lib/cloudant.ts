@@ -5,7 +5,7 @@
  * so the app can fall back to localStorage gracefully.
  */
 
-const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL || "https://trekko-d9ek.onrender.com";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
