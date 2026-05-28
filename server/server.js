@@ -65,10 +65,26 @@ async function setupCloudant() {
 }
 
 /* ─── Middleware ─── */
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://trekko-ai.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl, or server-to-server)
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"), false);
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());
