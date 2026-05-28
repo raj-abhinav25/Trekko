@@ -684,7 +684,7 @@ app.get("/api/trips/:email", async (req, res) => {
   const prefix = `trip::${email}::`;
 
   try {
-    const response = await cloudant.allDocs({
+    const response = await cloudant.postAllDocs({
       db: DB_TRIPS,
       includeDocs: true,
       startKey: prefix,
