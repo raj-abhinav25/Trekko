@@ -1014,8 +1014,39 @@ export default function Home() {
     }, [days, destination, showToast]);
 
     const handleVoiceSearch = () => {
+        interface ISpeechRecognitionEvent {
+            resultIndex: number;
+            results: {
+                [index: number]: {
+                    [index: number]: {
+                        transcript: string;
+                    };
+                };
+            };
+        }
+
+        interface ISpeechRecognitionErrorEvent {
+            error: string;
+        }
+
+        interface ISpeechRecognition {
+            new (): ISpeechRecognitionInstance;
+        }
+
+        interface ISpeechRecognitionInstance {
+            continuous: boolean;
+            interimResults: boolean;
+            lang: string;
+            onstart: () => void;
+            onresult: (event: ISpeechRecognitionEvent) => void;
+            onerror: (event: ISpeechRecognitionErrorEvent) => void;
+            onend: () => void;
+            start: () => void;
+        }
+
         // Check for browser support
-        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        const SpeechRecognition = (window as unknown as { SpeechRecognition?: ISpeechRecognition; webkitSpeechRecognition?: ISpeechRecognition }).SpeechRecognition ||
+            (window as unknown as { SpeechRecognition?: ISpeechRecognition; webkitSpeechRecognition?: ISpeechRecognition }).webkitSpeechRecognition;
         if (!SpeechRecognition) {
             alert("Sorry, your browser doesn't support voice search. Try Chrome!");
             return;
@@ -1030,7 +1061,7 @@ export default function Home() {
             setIsListening(true);
         };
 
-        recognition.onresult = (event: any) => {
+        recognition.onresult = (event: ISpeechRecognitionEvent) => {
             const transcript = event.results[0][0].transcript;
             // Remove any trailing period the API sometimes adds
             const cleanTranscript = transcript.replace(/\.$/, '');
@@ -1041,7 +1072,7 @@ export default function Home() {
             setIsListening(false);
         };
 
-        recognition.onerror = (event: any) => {
+        recognition.onerror = (event: ISpeechRecognitionErrorEvent) => {
             console.error("Voice search error:", event.error);
             setIsListening(false);
         };
@@ -1222,10 +1253,12 @@ export default function Home() {
                                                         <div className="w-full h-full bg-shimmer animate-shimmer rounded-2xl" />
                                                     ) : !bannerImageError && selectedDestinationImage ? (
                                                         <>
-                                                            <img
+                                                            <Image
                                                                 src={selectedDestinationImage}
                                                                 alt={`${destination} destination`}
-                                                                className="w-full h-full object-cover rounded-lg"
+                                                                fill
+                                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                                className="object-cover rounded-lg"
                                                                 onError={() => setBannerImageError(true)}
                                                             />
                                                         </>
@@ -1598,23 +1631,25 @@ export default function Home() {
                                                 </p>
                                             </div>
                                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                                <div className="overflow-hidden rounded-2xl min-h-[260px] md:min-h-[340px]">
-                                                    <img
+                                                <div className="relative overflow-hidden rounded-2xl min-h-[260px] md:min-h-[340px]">
+                                                    <Image
                                                         src={moodBoardImages[0]}
                                                         alt={`${destination} mood board highlight`}
-                                                        className="rounded-2xl object-cover w-full h-full hover:scale-105 transition-transform duration-500 cursor-pointer"
-                                                        loading="lazy"
+                                                        fill
+                                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                        className="rounded-2xl object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
                                                         onClick={() => setZoomedImage(moodBoardImages[0])}
                                                     />
                                                 </div>
                                                 <div className="grid grid-cols-2 gap-4">
                                                     {moodBoardImages.slice(1, 5).map((imageUrl, imageIndex) => (
-                                                        <div key={`${imageUrl}-${imageIndex}`} className="overflow-hidden rounded-2xl h-32 sm:h-40 md:h-[162px]">
-                                                            <img
+                                                        <div key={`${imageUrl}-${imageIndex}`} className="relative overflow-hidden rounded-2xl h-32 sm:h-40 md:h-[162px]">
+                                                            <Image
                                                                 src={imageUrl}
                                                                 alt={`${destination} mood board image ${imageIndex + 2}`}
-                                                                className="rounded-2xl object-cover w-full h-full hover:scale-105 transition-transform duration-500 cursor-pointer"
-                                                                loading="lazy"
+                                                                fill
+                                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                                className="rounded-2xl object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
                                                                 onClick={() => setZoomedImage(imageUrl)}
                                                             />
                                                         </div>
@@ -1796,7 +1831,7 @@ export default function Home() {
                                                         className="flex-shrink-0 w-64 rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-500/10 dark:hover:shadow-orange-500/20 overflow-hidden group block"
                                                     >
                                                         <div className="h-36 overflow-hidden relative">
-                                                            <img src={hotel.img} alt={hotel.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                                            <Image src={hotel.img} alt={hotel.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-110 transition-transform duration-700" />
                                                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                                         </div>
                                                         <div className="p-4">
@@ -1828,7 +1863,7 @@ export default function Home() {
                                                         className="flex-shrink-0 w-64 rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-500/10 dark:hover:shadow-orange-500/20 overflow-hidden group block"
                                                     >
                                                         <div className="h-36 overflow-hidden relative">
-                                                            <img src={tour.img} alt={tour.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                                            <Image src={tour.img} alt={tour.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-110 transition-transform duration-700" />
                                                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                                         </div>
                                                         <div className="p-4">

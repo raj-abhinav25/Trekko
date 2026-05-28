@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Map, Sparkles, Globe, Navigation, CalendarDays, Wallet } from "lucide-react";
 import ThemeToggle from "./components/ThemeToggle";
 
@@ -74,10 +75,12 @@ export default function LandingPage() {
                 {/* Decorative mock UI or Image */}
                 <div className="mt-16 w-full max-w-5xl rounded-2xl overflow-hidden border border-slate-200/50 dark:border-slate-800/50 shadow-2xl shadow-slate-900/10 dark:shadow-slate-900/50 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm p-2">
                     <div className="w-full aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden relative bg-slate-100 dark:bg-slate-800 flex flex-col justify-center items-center">
-                        <img 
+                        <Image 
                             src="https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=2000&auto=format&fit=crop" 
                             alt="Travel aesthetic" 
-                            className="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-60 mix-blend-overlay"
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="object-cover opacity-80 dark:opacity-60 mix-blend-overlay"
                         />
                         <div className="relative z-10 flex flex-col items-center gap-4 bg-white/30 dark:bg-slate-950/50 backdrop-blur-md p-6 rounded-2xl border border-white/40 dark:border-slate-700/50">
                              <Map className="w-12 h-12 text-slate-900 dark:text-white" />
@@ -129,10 +132,12 @@ export default function LandingPage() {
             <section className="py-24 px-6">
                 <div className="max-w-5xl mx-auto rounded-3xl overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-cyan-500 mix-blend-multiply dark:mix-blend-color" />
-                    <img 
+                    <Image 
                         src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop" 
                         alt="Beach CTA" 
-                        className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover opacity-40 mix-blend-overlay"
                     />
                     <div className="relative z-10 p-12 md:p-20 text-center flex flex-col items-center">
                         <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 font-serif">Ready to explore the world?</h2>
