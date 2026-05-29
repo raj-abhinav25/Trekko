@@ -39,3 +39,7 @@ next-env.d.ts
 
 # output files
 lint_out.txt
+
+# IDE / Editor settings
+.vscode/
+
