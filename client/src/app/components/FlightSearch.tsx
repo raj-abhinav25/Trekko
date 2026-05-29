@@ -604,7 +604,7 @@ export default function FlightSearch() {
                 </div>
 
                 {/* ─── From / To Row ─── */}
-                <div className="flex items-end gap-2 mb-4">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-2 sm:gap-2 mb-4">
                   <AirportInput
                     id="fs-from"
                     label="From"
@@ -622,7 +622,7 @@ export default function FlightSearch() {
                     onClick={handleSwap}
                     whileHover={{ scale: 1.15, rotate: 180 }}
                     whileTap={{ scale: 0.9 }}
-                    className="fs-swap-btn"
+                    className="fs-swap-btn self-center mx-auto sm:mx-0 sm:mb-0 mb-0"
                     aria-label="Swap cities"
                   >
                     <ArrowRightLeft className="w-4 h-4" />

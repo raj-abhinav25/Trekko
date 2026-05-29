@@ -198,7 +198,7 @@ function QuickBookings({ destination }: { destination: string }) {
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
                 Quick Bookings
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3">
                 {bookings.map((b, i) => (
                     <motion.a
                         key={b.label}
@@ -1135,13 +1135,13 @@ export default function Home() {
                     <FloatingDecor />
 
                     <nav className="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-md border-b border-white/10">
-                        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+                        <div className="max-w-6xl mx-auto px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                             >
-                                <Link href="/" className="flex items-center gap-2.5 cursor-pointer">
-                                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <Link href="/" className="flex items-center gap-2 cursor-pointer">
+                                    <svg width="28" height="28" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <defs>
                                             <linearGradient id="logoGradDash" x1="0" y1="0" x2="34" y2="34" gradientUnits="userSpaceOnUse">
                                                 <stop offset="0%" stopColor="#f97316" />
@@ -1152,7 +1152,7 @@ export default function Home() {
                                         <circle cx="22" cy="9" r="3.5" fill="url(#logoGradDash)" />
                                         <path d="M22 12.5 L22 16" stroke="url(#logoGradDash)" strokeWidth="2" strokeLinecap="round" />
                                     </svg>
-                                    <span className="text-lg font-light tracking-[0.18em] uppercase text-white" style={{letterSpacing: '0.18em'}}>
+                                    <span className="text-base sm:text-lg font-light tracking-[0.18em] uppercase text-white" style={{letterSpacing: '0.18em'}}>
                                         Trekko
                                     </span>
                                 </Link>
@@ -1160,7 +1160,7 @@ export default function Home() {
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="flex items-center gap-2"
+                                className="flex items-center gap-1.5 sm:gap-2"
                             >
                                 {itinerary && (
                                     <div className="tooltip-wrapper" data-tooltip="Save Current Plan for Later">
@@ -1197,7 +1197,7 @@ export default function Home() {
 
 
 
-                    <section className="relative w-full min-h-[60vh] overflow-hidden flex flex-col items-center justify-center pt-24">
+                    <section className="relative w-full min-h-[55vh] sm:min-h-[60vh] overflow-hidden flex flex-col items-center justify-center pt-14 sm:pt-24">
                         <AnimatePresence>
                             <motion.div
                                 key={currentBgIndex}
@@ -1223,7 +1223,7 @@ export default function Home() {
 
                         <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-black/60 to-[#0f172a]" />
 
-                        <div className="relative z-20 w-full max-w-4xl px-4 pb-16">
+                        <div className="relative z-20 w-full max-w-4xl px-3 sm:px-4 pb-12 sm:pb-16">
                             <motion.div
                                 initial={{ opacity: 0, y: 40 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -1232,7 +1232,7 @@ export default function Home() {
                             >
                                 <form
                                     onSubmit={handleSubmit}
-                                    className="w-full max-w-3xl bg-[#FFFBF2]/40 dark:bg-[#1e2330]/80 backdrop-blur-2xl border border-amber-900/10 dark:border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl mx-auto transition-colors duration-300"
+                                    className="w-full max-w-3xl bg-[#FFFBF2]/40 dark:bg-[#1e2330]/80 backdrop-blur-2xl border border-amber-900/10 dark:border-white/10 rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl mx-auto transition-colors duration-300"
                                 >
                                     <AnimatePresence>
                                         {(selectedDestinationImage || bannerLoading) && (
@@ -1444,7 +1444,7 @@ export default function Home() {
 
                                         <div className="col-span-1 md:col-span-2 mt-4">
                                             <label className="text-sm text-stone-600 dark:text-gray-400 font-medium px-1 mb-2 block transition-colors duration-300">Travel Style</label>
-                                            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                                            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3">
                                                 {[
                                                     { id: 'Culture', icon: Landmark, label: 'Culture' },
                                                     { id: 'Relax', icon: Palmtree, label: 'Relax' },
@@ -1564,7 +1564,7 @@ export default function Home() {
 
                     <AnimatePresence>
                         {itinerary && (
-                            <section ref={resultsRef} className="px-6 pb-20">
+                            <section ref={resultsRef} className="px-3 sm:px-6 pb-20">
                                 <div className="max-w-3xl mx-auto">
                                     <motion.div
                                         initial={{ opacity: 0, y: 20 }}
@@ -1631,7 +1631,7 @@ export default function Home() {
                                                 </p>
                                             </div>
                                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                                <div className="relative overflow-hidden rounded-2xl min-h-[260px] md:min-h-[340px]">
+                                                <div className="relative overflow-hidden rounded-2xl min-h-[200px] sm:min-h-[260px] md:min-h-[340px]">
                                                     <Image
                                                         src={moodBoardImages[0]}
                                                         alt={`${destination} mood board highlight`}
@@ -1779,25 +1779,25 @@ export default function Home() {
                                                         )}
                                                     </div>
 
-                                                    <div className="flex justify-between w-full mt-6">
-                                                        <div>
+                                                    <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center w-full mt-6 gap-3 sm:gap-0">
+                                                        <div className="flex sm:justify-start">
                                                             {activeDayIndex > 0 && (
                                                                 <button
                                                                     type="button"
                                                                     onClick={handlePrevDay}
-                                                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/80 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-sm hover:bg-white dark:hover:bg-slate-700 hover:shadow-md transition-all"
+                                                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white/80 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-sm hover:bg-white dark:hover:bg-slate-700 hover:shadow-md transition-all"
                                                                 >
                                                                     <span>⬅</span>
                                                                     Previous Day
                                                                 </button>
                                                             )}
                                                         </div>
-                                                        <div>
+                                                        <div className="flex sm:justify-end">
                                                             {activeDayIndex < itinerary.length - 1 && (
                                                                 <button
                                                                     type="button"
                                                                     onClick={handleNextDay}
-                                                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 dark:from-cyan-500 dark:to-blue-500 text-white font-semibold text-sm shadow-md hover:shadow-lg hover:from-orange-600 hover:to-amber-600 dark:hover:from-cyan-400 dark:hover:to-blue-400 transition-all"
+                                                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 dark:from-cyan-500 dark:to-blue-500 text-white font-semibold text-sm shadow-md hover:shadow-lg hover:from-orange-600 hover:to-amber-600 dark:hover:from-cyan-400 dark:hover:to-blue-400 transition-all"
                                                                 >
                                                                     Next Day
                                                                     <span>➡</span>
